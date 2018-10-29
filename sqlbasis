@@ -1,1 +1,220 @@
 
+ddl command:data definiation language 
+define and modify the databaese structure of table or schema
+ddl commandss::
+create
+alter 
+drop
+truncate
+rename
+ 
+
+desc <table_name>
+create table <tablename>(column1 datatype,column1 datatype);
+drop table <tablename>
+alter table <tablename> add <columnname> <datatype>
+
+alter table <tablename> drop <columnname>
+modifing column::
+alter table <tablename> modify <columnname> <datatype> default <value>
+default value::
+alter table <tablename> alter <columnname> default 'defaultvalue' ;
+
+rename change tablename::
+alter table <tablenamn> rename to <newtablename>;
+
+truncate::
+:truncate table student;(drop table columns ddl commands it cannot be rooled back table structre rename same but columns are deleted)
+:delete from student;(it is dml command)
+
+in drop student( table completly remove )
+
+
+DML commands::(data manipulation language ) act row of a table
+insert 
+update
+delete
+
+insert::
+insert into <tablename>(column1 ,column ... ) values (value1,value...),(value1,value...);
+
+update::
+update <tablename> set <columnname>=value where <columnname>=value;
+
+update student set age=10,name='dd' where sid=4;
+
+delete::
+delete from <tablename> where <columnanme>=value;
+delete from <tablename> (whole table rows delete )
+
+
+date function::
+current date::
+curdate();
+
+MONTHS DIFF
+timestampdiff(month,'YYYY-MM-DD','YYYY-MM-DD')
+
+timestampdiff(day,'YYYY-MM-DD','YYYY-MM-DD')
+
+select ename,salary,timestamdiff(year,hiredate,curdate()) as yearworked from employees;
+
+
+::salary diff and increment salary of those employees whose hire date greater then 1 years::
+select ename,hiredate,timestampdiff(year,hiredate,curdate()) as yearworked,
+if(timestampdiff(year,hiredate,curdate())>1,salary+salary*0.1,salary) as newsalary from employees;
+
+QUARTER function::
+select quarter(curdate());
+
+
+case :::
+select ename ,hiredate ,case
+	when quarter(hiredate) 1 then 'firstquarter'
+	when quarter(hiredate) 2 then 'secquarter'
+	when quarter(hiredate) 3 then 'thrquarter'
+	when quarter(hiredate) 4 then 'fourquarter'
+	end as hireQuarter
+from employees;
+
+
+current dayname::
+dayname(curdate()):
+
+case example::
+select case(dayname(curdate()))
+	when 'sunday' then 'weekend'
+	when 'saturday' then 'weekend'
+	else 'weekday'
+end as dow;
+
+::current months::
+select extract(month from curdate());
+
+
+str_to_date function::
+select str_to_date('11-12-17','%m-%d-%y');
+op:: 2017-11-12 
+
+select clauses::return row by row
+select * from <tablename>;
+select columnname,... from <tablename>;
+select a from <tablename>  it goes to each row then retreive
+
+where clause::
+select ename,salary,salary*12 as 'yearsal' from employees;
+
+select used by row by row
+where clause use for filtering data
+select ename,salary,salary*12 as 'yearsal' from employees where deptid=20 and salary>12000;
+
+select ename,salary,salary*12 as 'yearsal' from employees where (deptid=20 or deptid=10) and salary>12000;
+
+clasuse in sql::
+in, between and likes::
+in == exact matching
+between == range matching
+like == pattern matching
+
+select ename ,salary from employees where designation='abc' or designation='xyz';
+
+in clause
+select ename ,salary from employees where designation in('abc','xyz') ;
+
+select ename ,salary from employees where deptid=10 or deptid=20;
+select ename ,salary from employees where deptid in(10,20) and salary>20000;
+
+between::>= and <=
+select ename from employees where salary>=20000 and salary<=30000;
+select ename from employees where salary between 20000 and 30000;
+
+select ename from employees where salary between 20000 and 30000 and deptid=10;
+
+select ename from employees where salary between 20000 and 30000 and deptid in(10);
+
+
+Like::%(match any string) _(single character matching)::
+select ename from employees where ename like 'n%'; start with n
+select ename from employees where ename like '%n'; end with n
+
+select ename from employees where ename like '___'; contain 3 char
+
+select ename ,designation from employees where desgination in('mangaer','developer') and ename like 'n%';
+
+
+handling null values::
+null::undertermine value
+0::it is determine value
+
+null value +any arthematic operation is undertermine value
+null value cannt be equate:
+select ename from employees where commission =null
+
+so we are using is clause:
+select ename from employees where commission is null
+select ename from employees where commission is not null
+
+
+orderby clause::by default asc order
+select ename ,salary from employees order by salary;
+
+select ename ,salary from employees order by salary desc;
+
+first sort by deptid then if any dept id is repeated then they sort on bais of salary
+select ename ,salary from employees order by deptid, salary;
+like 
+depid salary
+30 3000
+30 4000
+20 2000
+20 3000
+
+used order by with conjunctio of where clause
+select ename ,salary from employees where deptid=20 order by salary desc;
+
+limit key word::fetch me firsts three records
+select eid from employees limit 3;
+
+indexing limits::
+select eid from employees limit 1,3; getting 3 rows
+
+higehest salary::
+select eid from employees order by salary desc limit 1;
+
+second highest salary
+select eid from employees order by salary desc limit 1,1; //indexing 1 and 1
+
+case statements::
+case <expression> 
+when <case exmpression1> then command
+when <case exmpression2> then command
+else commands
+end
+
+find number is even or odd
+
+set @number=10;
+select case(@number%2)
+when 0 then 'even'
+when 1 then 'odd'
+end as ecode
+
+for aliasing using as
+
+conditionally increment sallary on basis of dept manage increase by 2000 if developer incr by 1000 else remain same
+
+select ename ,salary ,case(designation)
+when 'manger' then salary +2000
+when 'developer' then salary +1000
+else salary 
+end as netsalary 
+from employees;
+
+adding prefix mr,mrs on the basis of gender
+select ename, case(gender)
+when 'm' then concat('mr',ename)
+when 'F' then concat('mrs',ename)
+else ename end as name
+from employees;
+
+string function::
