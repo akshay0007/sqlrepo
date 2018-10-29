@@ -218,3 +218,35 @@ else ename end as name
 from employees;
 
 string function::
+length function
+select length('abc');
+op :3
+
+upper::
+select upper('abc');
+
+substring::
+select substring('nikhil',2,4)
+op::ikhi (from second pos we extract 4 character)
+
+instr() ::index pos find out
+select instr('nikhil' ,'i')
+first occurance of i
+op::2
+
+concat('','') concat both of string and 2 level of nesting is perform
+
+for adding first and last name with space seprator::
+select first,last,concat(first,concat(' ',last)) from employees;
+
+ltrim()::remove left side  trailling spaces
+select ltrim('  abc');
+op abc
+
+repeat ::repetion of particular value
+like repeat('*',5)::*****
+
+replace('amit','a','v'):replace a with v
+op:::vmit
+
+
