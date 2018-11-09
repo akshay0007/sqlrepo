@@ -250,3 +250,142 @@ replace('amit','a','v'):replace a with v
 op:::vmit
 
 
+
+
+
+new
+================================
+select * from employee where salary=6000;
+then it go through all data and 
+
+idexes on commision column 
+
+create index index3 on employees (commission);
+
+explain select ename from employees where commission =50000;
+
+
+cluster indexes;
+secondary index allocation is differently
+
+
+indexes stored values in sorted order by default ascending order;;
+
+
+searching containt in books from indexs
+
+
+genral cluster indexes;;
+storing data of the table into insertion order::
+
+
+cluster and secondary indexes::
+a clustered index determines the physical order of data in a table it is analogus to a telephone directory,it doesnot required any addition disk space.
+
+a table can have only one cluster index .
+
+primary key constraint creates a clustered index automatically
+
+secondary index is same as index of text book where data stored in one place and index into another,index is a pointer of data ,
+
+in secondary index data storage in asceding order and a single table has more then one secondary indexes.
+
+select table_id from information_schema.innodb_sys_talbes wher name='test/emp'
+
+primary key create automatically cluster index into table ;	
+
+
+disadvantages::
+insertion , deletion and updataion is create more complexcity into tables.
+
+
+stored procedures:::
+it is segement of decalarative statement stored inside database catalogs
+
+it increase performance ,reduce network traffic,provide code resusality and security..
+
+stored in pass in complile format inside database;
+
+create procedure <procedure name>(parm_list)
+begin
+  varialble declaration;
+  perform some operation
+end
+
+paramert passed inside store procedure::
+3 fromat::
+IN, OUT and INOUT;
+
+
+set @a=2;
+
+create  procedure pp5(IN a integer)
+begin 
+set a=10;
+end &
+
+o/p::2
+create  procedure pp5(OUT a integer)
+begin 
+set a=10;
+end &
+
+o/p::10
+
+create  procedure pp5(INOUT a integer)
+begin 
+set a=10;
+end &
+
+o/p::
+
+call pp5(@a);
+op
+ 
+delimiter &
+
+set @a=4;
+create procedure pp1(IN a integer)
+begin 
+set a=a+10;
+end &
+
+
+number is odd or even ::
+delimiter &
+
+create procedure odd_even(IN num integer)
+begin 
+if num%2 =0 then
+select 'the number is even';
+else 
+select 'number is odd';
+end if;
+end &
+
+loops::
+while loops::
+
+
+delimiter &
+create procedure id_prime(IN a integer)
+begin 
+declare count integer;
+declare num integer;
+set num=2;
+set count=0;
+
+while num<=a/2 do
+if a%num=0 then
+set count=count+1;
+end if;
+set num=num+1;
+end while
+if count=0 then
+select 'the number is prime';
+else 
+select 'the number is composite';
+end if
+end &
+
+
