@@ -1,0 +1,102 @@
+spring boot::
+SpringApplication.run(DemoApplication.class,args)
+
+
+Class Loader::
+ A class loader is an object that is responsible for loading classes. The
+ * class <tt>ClassLoader</tt> is an abstract class.  Given the <a
+ * href="#name">binary name</a> of a class, a class loader should attempt to
+ * locate or generate data that constitutes a definition for the class.  A
+ * typical strategy is to transform the name into a file name and then read a
+ * "class file" of that name from a file system.
+
+Applications implement subclasses of <tt>ClassLoader</tt> in order to
+ * extend the manner in which the Java virtual machine dynamically loads
+ * classes
+
+
+ClassLoader</tt> class uses a delegation model to search for
+ * classes and resources.  Each instance of <tt>ClassLoader</tt> has an
+ * associated parent class loader.  When requested to find a class or
+ * resource, a <tt>ClassLoader</tt> instance will delegate the search for the
+ * class or resource to its parent class loader before attempting to find the
+ * class or resource itself.  The virtual machine's built-in class loader,
+ * called the "bootstrap class loader", does not itself have a parent but may
+ * serve as the parent of a <tt>ClassLoader</tt> instance.
+
+Normally, the Java virtual machine loads classes from the local file
+ * system in a platform-dependent manner.  For example, on UNIX systems, the
+ * virtual machine loads classes from the directory defined by the
+ * <tt>CLASSPATH</tt> environment variable
+.
+
+class NetworkClassLoader extends ClassLoader{
+	String host,port
+
+public class findClass(String className){
+bytes[] b=loadClassData(classname);
+return defineClass(name,b,0,.b.length
+}
+
+privae byte[] loadClassData(String name){
+
+}
+}
+
+@RestController
+@RequestMapping
+
+@SpringBootApplication
+@RestController
+
+
+static <E> Iterator<E> singletonIterator(final E e){
+return new Iterator<E>(){
+private boolean hasNext=true;
+public boolean hasNext(){
+retrun hasNext;
+}
+public E next(){
+if(hasNext){
+hasNext=false;
+return e
+}
+throw new NuSucheElementException();
+}
+}
+}
+
+
+jdbc templetes;
+jdbctemplet.query("select firstname,last_name from users",new RowMapper<User,User>(){
+pubic User mapRow(ResultSet rs,int row){
+return new User(rs.getString(1),rs.getString(2)
+}
+})
+
+
+ApplicationRunner
+
+ @RequestMapping(value = "/products", method = RequestMethod.POST)
+   public ResponseEntity<Object> createProduct(@RequestBody Product product) {
+      productRepo.put(product.getId(), product);
+      return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
+   }
+
+
+  @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+   public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product) { 
+      productRepo.remove(id);
+      product.setId(id);
+      productRepo.put(id, product);
+      return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
+   } 
+
+
+Exception Handler
+ControllerAdvice
+
+@ExceptionHandler(value = ProductNotfoundException.class)
+ControllerAdvice
+
+
