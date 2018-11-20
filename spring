@@ -100,3 +100,6 @@ ControllerAdvice
 ControllerAdvice
 
 
+DispatcherServlet will be loaded and initialized by calling init() method
+init() of DispatcherServlet will try to identify the Spring Configuration Document with naming conventions like  "servlet_name-servlet.xml" then all beans can be identified.
+
